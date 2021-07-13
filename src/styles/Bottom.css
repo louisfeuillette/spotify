@@ -1,4 +1,4 @@
-.nav-container {
+.bottom-container {
     display: flex;
     background-color: #ffff;
     border: 1px solid black;
@@ -6,7 +6,4 @@
     height: 15%;
     justify-content: center;
     align-items: center;
-}
-.nav-title {
-    font-size: 24px;
 }
