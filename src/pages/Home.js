@@ -3,7 +3,8 @@ import axios from 'axios';
 
 import NavBar from '../components/NavBar';
 import Search from '../components/Search';
-import Bottom from '../components/Bottom'
+import Card from '../components/Card';
+import Bottom from '../components/Bottom';
 
 import '../styles/Home.css';
 
@@ -12,9 +13,11 @@ const Home = () => {
 
     const [token, setToken] = useState('')
 
-    // const handleClickGet = () => {
-    //     console.log(token)
-    // }
+    const [artists, setArtists] = useState([])
+
+    const handleParents = (arg) => {
+        setArtists(arg)
+    }
 
     useEffect(() => {
         axios('https://accounts.spotify.com/api/token', {
@@ -36,9 +39,19 @@ const Home = () => {
         <div className='all-container'>
             <NavBar />
                 <div className="home-container">
-                    <Search />
-                    {/* <button onClick={()=> handleClickGet()}>POST</button> */}
-                    <p className="home-text">Saisi un artiste dans <br/>la barre de recherche</p>
+                    <Search data={handleParents} token={token}/>
+                    <div className="card-container"> 
+                    {
+                        artists.length === 0 ? 
+                        <p className="home-text">Saisi un artiste dans <br/>la barre de recherche</p>
+                        :
+                        artists.map((e, i)=>{
+                            return(
+                                    <Card id={e.id} name={e.name} img={e.images} key={i}/>
+                            )
+                        })
+                    }   
+                    </div>
                 </div>
             <Bottom />
         </div>

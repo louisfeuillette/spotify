@@ -3,26 +3,24 @@ import axios from 'axios';
 
 import '../styles/Search.css'
 
-const Search = () => {
+const Search = (props) => {
 
     const [search, setSearch] = useState('')
-
-    const token = "BQA_2PHHkNZtrEGkLqhA80UmEvse_xOQ20ky5K4SJ5V4lwVMrlo25Ck6UPe8sMfhaW1W6AJ0FwX_wRoDsJA6Py-e8o2JjzO6dt8iJP-Vw-b_nF9QD7GIYfNfRd5Y9ggSYRSeMx0loxmAiC5qBsWOcHCjpBEvcgKDAzpPBog"
-
 
     const handleSearch = async () => {
         
         const url = 'https://api.spotify.com/v1/search'
         const headers = {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${props.token}`
         }
 
         axios(url+`?q=${search}&type=artist`, {
             method: "GET",
             headers,
         })
-        .then((res) => {
-            console.log(res, 'response')
+        .then( async (res) => {
+            console.log(res.data.artists.items, 'res data ARTIST')
+            await props.data(res.data.artists.items)
         })
     }
 
