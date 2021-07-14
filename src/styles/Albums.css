@@ -1,0 +1,19 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.card-artist {
+    margin: 15px 5px;
+}
+.card-img {
+    border-radius: 8px;
+    width: 100px;
+    height: 100px;
+}
+.card-name {
+    color: #191414;
+    font-size: 18px;
+}

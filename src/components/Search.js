@@ -11,7 +11,7 @@ const Search = (props) => {
         
         const url = 'https://api.spotify.com/v1/search'
         const headers = {
-            Authorization: `Bearer ${props.token}`
+            "Authorization": `Bearer ${props.token}`
         }
 
         axios(url+`?q=${search}&type=artist`, {
@@ -19,7 +19,6 @@ const Search = (props) => {
             headers,
         })
         .then( async (res) => {
-            console.log(res.data.artists.items, 'res data ARTIST')
             await props.data(res.data.artists.items)
         })
     }

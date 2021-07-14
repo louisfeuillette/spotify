@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import NavBar from '../components/NavBar';
 import Search from '../components/Search';
 import Card from '../components/Card';
-import Bottom from '../components/Bottom';
 
 import '../styles/Home.css';
 
@@ -20,13 +18,16 @@ const Home = () => {
     }
 
     useEffect(() => {
-        axios('https://accounts.spotify.com/api/token', {
+        const url = "https://accounts.spotify.com/api/token"
+        const headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic Mzg0YzdlYTY2MjZmNDcyN2IwMTk4ZjNmOTk5ZmUzMTQ6NzhiY2IzYjhjNDIyNDNmMDhkZDk5YjQ1NWMwNmIxNDg=',
+        }
+
+        axios(url, {
             method: "POST",
             data: "grant_type=client_credentials",
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic Mzg0YzdlYTY2MjZmNDcyN2IwMTk4ZjNmOTk5ZmUzMTQ6NzhiY2IzYjhjNDIyNDNmMDhkZDk5YjQ1NWMwNmIxNDg=',
-            },
+            headers,
         })
         .then((res) => {
             if(res.status === 200) {
@@ -39,7 +40,7 @@ const Home = () => {
         <div className='all-container'>
             <NavBar />
                 <div className="home-container">
-                    <Search data={handleParents} token={token}/>
+                    <Search data={handleParents} token={token} />
                     <div className="card-container"> 
                     {
                         artists.length === 0 ? 
@@ -53,7 +54,6 @@ const Home = () => {
                     }   
                     </div>
                 </div>
-            <Bottom />
         </div>
     )
 }
