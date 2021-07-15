@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import {Howl, Howler} from 'howler';
+import NavBar from '../components/NavBar';
+import { PauseCircleOutline } from 'react-ionicons'
 
-import '../styles/Card.css'
+import "../styles/Tracks.css"
 
 const Tracks = (props) => {
 
@@ -23,7 +25,10 @@ const Tracks = (props) => {
             headers,
         })
         .then((res) => {
-            if (res.status === 200) setItems(res.data.items)
+            if (res.status === 200) {
+                console.log(res.data.items)
+                setItems(res.data.items)
+            }
         }).catch(err => console.error("err", err))
     }, [])
 
@@ -45,25 +50,35 @@ const Tracks = (props) => {
 
     
     return (
-        <div className="tracks-container">
-            
-            {items.map((e, i)=> {
-                return (
-                    <div key={i}>
-                        <p></p>
-                        <p onClick={()=> playTrack(e)} >{e.name}</p>
-                    </div>
-                )
-            })}
-            <button onClick={() => {
-                if (sound !== null) {
-                    sound.stop()
-                    sound.unload()
-                    sound = null
-                }
-            }}>Stop the music</button>
-        </div>
-
+        <>
+            <NavBar />
+            <div className="tracks-container">
+                
+                {items.map((e, i)=> {
+                    return (
+                        <div key={i} className="tracks-line">
+                            <p className="tracks-number">{e.track_number}</p>
+                            <p style={{color: "#ffff"}}>-</p>
+                            <p className="tracks-name" onClick={()=> playTrack(e)} >{e.name}</p>
+                        </div>
+                    )
+                })}
+            </div>
+            <div className="tracks-bottom">
+                <PauseCircleOutline
+                    onClick={() => {
+                        if (sound !== null) {
+                            sound.stop()
+                            sound.unload()
+                            sound = null
+                        }
+                    }}
+                    color={'#ffff'} 
+                    height="50px"
+                    width="50px"
+                />
+            </div>
+        </>
     )
 }
 

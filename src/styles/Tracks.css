@@ -1,0 +1,27 @@
+.tracks-container {
+    width: 100vw;
+    height: 60vh;
+    background-color: #191414;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tracks-line {
+    display: flex;
+}
+.tracks-number {
+    color: #ffff;
+    padding-right: 8px;
+}
+.tracks-name{
+    color: #ffff;
+    padding-left: 8px;
+}
+.tracks-bottom {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,7 +1,6 @@
 .nav-container {
     display: flex;
-    background-color: #ffff;
-    border: 1px solid black;
+    background-color: #191414;
     width: 100%;
     height: 15%;
     justify-content: center;
@@ -9,4 +8,11 @@
 }
 .nav-title {
     font-size: 24px;
+    padding-top: 5px;
+    padding-left: 10px;
+    color: #ffff;
+}
+.nav-logo {
+    width:100%;
+    max-width:200px
 }

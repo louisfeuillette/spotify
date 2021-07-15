@@ -21,7 +21,7 @@ const Home = () => {
         const url = "https://accounts.spotify.com/api/token"
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic Mzg0YzdlYTY2MjZmNDcyN2IwMTk4ZjNmOTk5ZmUzMTQ6NzhiY2IzYjhjNDIyNDNmMDhkZDk5YjQ1NWMwNmIxNDg=',
+            'Authorization': `${process.env.TOKEN_CODE}`,
         }
 
         axios(url, {

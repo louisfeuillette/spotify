@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { withRouter } from "react-router";
 import axios from 'axios';
+import NavBar from '../components/NavBar';
 
 import "../styles/Albums.css"
 import default_album from "../assets/default_album.png"
@@ -27,25 +28,28 @@ const AlbumsPage = (props) => {
             headers,
         })
         .then((res) => {
-            if (res.status === 200) setItems(res.data.items)
+            if (res.status === 200) setItems(res.data.items.slice(0,8))
         }).catch(err => console.error("err", err))
     }, [])
     
     let tokenFromStorage = window.localStorage.getItem("tokenStorage")
 
     return (
-            <div className="card-container">
+        <>
+        <NavBar />
+            <div className="albums-container">
                 {items.map((e, i) => {
                     return (
-                        <div key={i}>
-                            <div className="card-artist">
+                        <div key={i} className="albums-card-container">
+                            <div className="albums-card-artist">
                                 <img src={e.images[0]?.url || default_album} className="card-img" onClick={()=> handleIdAlbums(e)} alt="albums"/>            
-                                <p className="card-name">{e.name}</p>
+                                <p className="albums-card-name">{e.name}</p>
                             </div>
                         </div>
                     )
                 })}
             </div>
+            </>
     )
 }
 

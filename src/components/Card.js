@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from "react-router";
+import "../styles/Card.css"
 
-import '../styles/Card.css'
 import default_album from "../assets/default_album.png"
 
 const Card = (props) => {
