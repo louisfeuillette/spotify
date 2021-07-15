@@ -28,8 +28,6 @@ const Tracks = (props) => {
     }, [])
 
     let tokenFromStorage = window.localStorage.getItem("tokenStorage")
-    console.log(tokenFromStorage, 'no parse data on track page')
-    // console.log(JSON.parse(tokenFromStorage), 'data on track page')
 
     const playTrack = (arg) => {
         if (sound != null) {

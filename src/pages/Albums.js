@@ -9,15 +9,6 @@ const AlbumsPage = (props) => {
     
     const [items, setItems] = useState([])
     
-    // let tokenStorage = window.localStorage.getItem("tokenStorage")
-    // console.log(JSON.parse(tokenStorage), 'data album')
-
-    // const [token, setToken] = useState(
-    //     window.localStorage.getItem(tokenStorage) || ''
-    // );
-
-    // console.log(token, 'from storage ?')
-
     const handleIdAlbums = (arg) => {
         props.history.push(`/${arg.id}/tracks`)
     }
@@ -41,8 +32,6 @@ const AlbumsPage = (props) => {
     }, [])
     
     let tokenFromStorage = window.localStorage.getItem("tokenStorage")
-    console.log(tokenFromStorage, 'no parse data on album page')
-    // console.log(JSON.parse(tokenFromStorage), 'data on album page')
 
     return (
             <div className="card-container">

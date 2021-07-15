@@ -37,14 +37,8 @@ const Home = () => {
 
         
     }, [])
-    // window.localStorage.setItem("tokenStorage", JSON.stringify(token))
+
     window.localStorage.setItem("tokenStorage", token)
-    
-    useEffect(() => {
-        const data = window.localStorage.getItem("tokenStorage")
-        console.log(data, 'no parse token in home')
-        // console.log(JSON.parse(data), 'token in home')
-    }, [token])
     
     return (
         <div className='all-container'>
