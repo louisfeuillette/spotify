@@ -14,7 +14,7 @@ const Tracks = (props) => {
         const url = `https://api.spotify.com/v1/albums${props.history.location.pathname}`
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Bearer BQAZ9IGyb7T-u7r7NhS9_zjkQvdR-KPZoIBS9YVlMHZK5RQMIUQ1c_j-xjPgFi6PAMk9_fJdQHybHn1gwkM',
+            'Authorization': `Bearer ${tokenFromStorage}` ,
         }
 
         axios(url, {
@@ -26,6 +26,10 @@ const Tracks = (props) => {
             if (res.status === 200) setItems(res.data.items)
         }).catch(err => console.error("err", err))
     }, [])
+
+    let tokenFromStorage = window.localStorage.getItem("tokenStorage")
+    console.log(tokenFromStorage, 'no parse data on track page')
+    // console.log(JSON.parse(tokenFromStorage), 'data on track page')
 
     const playTrack = (arg) => {
         if (sound != null) {

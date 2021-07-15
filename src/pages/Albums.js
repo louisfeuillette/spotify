@@ -8,17 +8,26 @@ import default_album from "../assets/default_album.png"
 const AlbumsPage = (props) => {
     
     const [items, setItems] = useState([])
+    
+    // let tokenStorage = window.localStorage.getItem("tokenStorage")
+    // console.log(JSON.parse(tokenStorage), 'data album')
+
+    // const [token, setToken] = useState(
+    //     window.localStorage.getItem(tokenStorage) || ''
+    // );
+
+    // console.log(token, 'from storage ?')
 
     const handleIdAlbums = (arg) => {
         props.history.push(`/${arg.id}/tracks`)
     }
-    
+
     useEffect(() => {
 
         const url = `https://api.spotify.com/v1/artists${props.history.location.pathname}`
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Bearer BQAZ9IGyb7T-u7r7NhS9_zjkQvdR-KPZoIBS9YVlMHZK5RQMIUQ1c_j-xjPgFi6PAMk9_fJdQHybHn1gwkM'
+            'Authorization': `Bearer ${tokenFromStorage}`
         }
 
         axios(url, {
@@ -30,6 +39,10 @@ const AlbumsPage = (props) => {
             if (res.status === 200) setItems(res.data.items)
         }).catch(err => console.error("err", err))
     }, [])
+    
+    let tokenFromStorage = window.localStorage.getItem("tokenStorage")
+    console.log(tokenFromStorage, 'no parse data on album page')
+    // console.log(JSON.parse(tokenFromStorage), 'data on album page')
 
     return (
             <div className="card-container">

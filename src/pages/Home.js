@@ -34,8 +34,18 @@ const Home = () => {
                 setToken(res.data.access_token)
             }
         })
-    }, [])
 
+        
+    }, [])
+    // window.localStorage.setItem("tokenStorage", JSON.stringify(token))
+    window.localStorage.setItem("tokenStorage", token)
+    
+    useEffect(() => {
+        const data = window.localStorage.getItem("tokenStorage")
+        console.log(data, 'no parse token in home')
+        // console.log(JSON.parse(data), 'token in home')
+    }, [token])
+    
     return (
         <div className='all-container'>
             <NavBar />
@@ -48,7 +58,7 @@ const Home = () => {
                         :
                         artists.map((e, i)=>{
                             return(
-                                    <Card id={e.id} name={e.name} img={e.images} key={i}/>
+                                    <Card token={token} id={e.id} name={e.name} img={e.images} key={i}/>
                             )
                         })
                     }   
