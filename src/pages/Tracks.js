@@ -11,6 +11,8 @@ const Tracks = (props) => {
     const [items, setItems] = useState([])
     let sound = null;
 
+    let tokenFromStorage = window.localStorage.getItem("access_token")
+    
     useEffect(() => {
 
         const url = `https://api.spotify.com/v1/albums${props.history.location.pathname}`
@@ -31,7 +33,6 @@ const Tracks = (props) => {
         }).catch(err => console.error("err", err))
     }, [])
 
-    let tokenFromStorage = window.localStorage.getItem("tokenStorage")
 
     const playTrack = (arg) => {
         if (sound != null) {

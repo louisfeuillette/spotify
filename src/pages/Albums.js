@@ -13,6 +13,8 @@ const AlbumsPage = (props) => {
     const handleIdAlbums = (arg) => {
         props.history.push(`/${arg.id}/tracks`)
     }
+    
+    let tokenFromStorage = localStorage.getItem("access_token")
 
     useEffect(() => {
 
@@ -32,7 +34,6 @@ const AlbumsPage = (props) => {
         }).catch(err => console.error("err", err))
     }, [])
     
-    let tokenFromStorage = window.localStorage.getItem("tokenStorage")
 
     return (
         <>

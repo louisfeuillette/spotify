@@ -6,12 +6,16 @@ import Card from '../components/Card';
 
 import '../styles/Home.css';
 
+import default_album from "../assets/default_album.png"
+
 
 const Home = () => {
 
     const [token, setToken] = useState('')
 
     const [artists, setArtists] = useState([])
+
+    const [recentlyPlayed, setRecentlyPlayed] =useState([])
 
     const [isLogged, setIsLogged] = useState(false)
 
@@ -44,46 +48,63 @@ const Home = () => {
             localStorage.setItem("token_type", token_type)
 
             localStorage.access_token ? setIsLogged(true) : setIsLogged(false)
-        }
-    })
 
-    useEffect(() => {
-        const url = "https://accounts.spotify.com/api/token"
+        }
+
+        let tokenFromStorage = window.localStorage.getItem("access_token")
+
+        const url = `https://api.spotify.com/v1/me/player/recently-played`
         const headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `${process.env.REACT_APP_TOKEN_CODE}`,
+            'Authorization': `Bearer ${tokenFromStorage}`
         }
 
         axios(url, {
-            method: "POST",
+            method: "GET",
             data: "grant_type=client_credentials",
             headers,
         })
         .then((res) => {
-            if(res.status === 200) {
-                setToken(res.data.access_token)
-            }
-        })
+            console.log(res.data.items)
+            res.data.items ? setRecentlyPlayed(res.data.items.slice(0,6)) : setRecentlyPlayed(null)
+        }).catch(err => console.error("err", err))
+
     }, [])
 
-    window.localStorage.setItem("tokenStorage", token)
+    console.log('recentlyPlayed',recentlyPlayed)
     
     return (
         <div className='all-container'>
             <NavBar />
                 <div className="home-container">
-                    <Search data={handleParents} token={token} />
+                    <Search data={handleParents} token={localStorage.access_token} />
                     <div className="card-container"> 
                     {
-                        artists.length === 0 ? 
-                        <p className="home-text">Saisi un artiste dans <br/>la barre de recherche</p>
-                        :
-                        artists.map((e, i)=>{
+                        artists.length === 0 ? (
+                            <div className="home-without-songs">
+                            <p className="home-text">Saisi un artiste dans <br/>la barre de recherche</p>
+                            <p className="home-text-recently-play">Écoute récente :</p>
+                            <div className="home-recently-play-container">
+                            {
+                            recentlyPlayed.map((e, i)=> {
+                                return(
+                                    <div key={i} className="home-recently-play-card">
+                                        <img className="home-recently-play-picture" src={e.track.album.images[0]?.url || default_album} />
+                                        <p className="home-recently-play-title">{e.track.artists[0].name}</p>
+                                    </div>
+                                )
+                            })
+                            }
+                            </div>
+                            </div>
+                        ) : (
+                            artists.map((e, i)=>{
                             return(
                                     <Card token={token} id={e.id} name={e.name} img={e.images} key={i}/>
-                            )
-                        })
-                    }   
+                            );
+                            })
+                        )
+                    };   
                     </div>
                 </div>
         </div>
