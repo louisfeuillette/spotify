@@ -35,6 +35,7 @@ const Home = () => {
     }
 
     useEffect(()=> {
+        localStorage.clear()
         if(window.location.hash) {
             const {
                 access_token, 

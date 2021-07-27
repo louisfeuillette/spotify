@@ -1,5 +1,7 @@
 import React from 'react';
-import axios from 'axios';
+import logo from "../assets/logo.svg"
+
+import '../styles/Login.css';
 
 const Login = () => {
 
@@ -8,9 +10,14 @@ const Login = () => {
     }
 
     return (
-        <div>
-            <p>Login</p>
-            <button onClick={()=> handleLogin()}>se connecter</button>
+        <div className="login-div">
+            <div className="nav-container">
+                <img src={logo} alt='logo spotify' className="nav-logo" />
+                <p className='nav-title'>for Black Smith</p>
+            </div>
+            <div>
+                <button className="login-bouton" onClick={()=> handleLogin()}>SE CONNECTER</button>
+            </div>
         </div>
     )
 }
