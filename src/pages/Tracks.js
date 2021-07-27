@@ -26,7 +26,6 @@ const Tracks = (props) => {
         })
         .then((res) => {
             if (res.status === 200) {
-                console.log(res.data.items)
                 setItems(res.data.items)
             }
         }).catch(err => console.error("err", err))

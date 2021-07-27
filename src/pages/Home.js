@@ -13,9 +13,39 @@ const Home = () => {
 
     const [artists, setArtists] = useState([])
 
+    const [isLogged, setIsLogged] = useState(false)
+
     const handleParents = (arg) => {
         setArtists(arg)
     }
+
+    const getReturnsParams = (hash) => {
+        const string = hash.substring(1);
+        const paramsInUrl = string.split("&");
+        const paramsSplitUp = paramsInUrl.reduce((accumulater, currentValue) =>{
+            const [key, value] = currentValue.split("=");
+            accumulater[key] = value;
+            return accumulater;
+        }, {})
+        return paramsSplitUp 
+    }
+
+    useEffect(()=> {
+        if(window.location.hash) {
+            const {
+                access_token, 
+                expires_in, 
+                token_type
+            } = getReturnsParams(window.location.hash)
+
+            localStorage.clear()
+            localStorage.setItem("access_token", access_token)
+            localStorage.setItem("expires_in", expires_in)
+            localStorage.setItem("token_type", token_type)
+
+            localStorage.access_token ? setIsLogged(true) : setIsLogged(false)
+        }
+    })
 
     useEffect(() => {
         const url = "https://accounts.spotify.com/api/token"
@@ -34,8 +64,6 @@ const Home = () => {
                 setToken(res.data.access_token)
             }
         })
-
-        
     }, [])
 
     window.localStorage.setItem("tokenStorage", token)
