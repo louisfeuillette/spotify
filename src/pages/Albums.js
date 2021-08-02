@@ -12,6 +12,7 @@ const AlbumsPage = (props) => {
 
     const [isLogged, setIsLogged] = useState(false);
 
+    // Push the id of the album in the URL
     const handleIdAlbums = (arg) => {
         props.history.push(`/${arg.id}/tracks`);
     };
@@ -25,6 +26,7 @@ const AlbumsPage = (props) => {
         Authorization: `Bearer ${tokenFromStorage}`,
         };
 
+        // Fetch to get albums
         axios(url, {
         method: "GET",
         data: "grant_type=client_credentials",

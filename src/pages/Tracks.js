@@ -15,10 +15,11 @@ const Tracks = (props) => {
     useEffect(() => {
         const url = `https://api.spotify.com/v1/albums${props.history.location.pathname}`;
         const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Bearer ${tokenFromStorage}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: `Bearer ${tokenFromStorage}`,
         };
 
+        // 
         axios(url, {
         method: "GET",
         data: "grant_type=client_credentials",
@@ -26,7 +27,7 @@ const Tracks = (props) => {
         })
         .then((res) => {
             if (res.status === 200) {
-            setItems(res.data.items);
+                setItems(res.data.items);
             }
         })
         .catch((err) => console.error("err", err));
@@ -34,14 +35,14 @@ const Tracks = (props) => {
 
     const playTrack = (arg) => {
         if (sound != null) {
-        sound.stop();
-        sound.unload();
-        sound = null;
+            sound.stop();
+            sound.unload();
+            sound = null;
         }
         sound = new Howl({
-        src: arg.preview_url,
-        html5: true,
-        autoplay: true,
+            src: arg.preview_url,
+            html5: true,
+            autoplay: true,
         });
         sound.play();
     };

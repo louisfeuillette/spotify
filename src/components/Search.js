@@ -9,9 +9,10 @@ const Search = (props) => {
     const handleSearch = async () => {
         const url = "https://api.spotify.com/v1/search";
         const headers = {
-        Authorization: `Bearer ${props.token}`,
+            Authorization: `Bearer ${props.token}`,
         };
 
+        // Fetch to get artist written in searchbar 
         axios(url + `?q=${search}&type=artist`, {
         method: "GET",
         headers,

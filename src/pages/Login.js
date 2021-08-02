@@ -4,6 +4,8 @@ import logo from "../assets/logo.svg";
 import "../styles/Login.css";
 
 const Login = () => {
+    
+    // link to get access token on URL
     const handleLogin = () => {
         window.location =
         "https://accounts.spotify.com/authorize?client_id=384c7ea6626f4727b0198f3f999fe314&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&scope=user-read-recently-played&show_dialog=true";
