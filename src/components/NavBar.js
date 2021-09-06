@@ -11,7 +11,6 @@ const NavBar = () => {
         <Link to="/">
             <img src={logo} alt="logo spotify" className="nav-logo" />
         </Link>
-        <p className="nav-title">for Black Smith</p>
         </div>
     );
 };

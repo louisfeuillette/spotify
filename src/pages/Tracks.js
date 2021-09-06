@@ -19,7 +19,6 @@ const Tracks = (props) => {
             Authorization: `Bearer ${tokenFromStorage}`,
         };
 
-        // 
         axios(url, {
         method: "GET",
         data: "grant_type=client_credentials",

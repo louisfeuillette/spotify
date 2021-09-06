@@ -9,56 +9,23 @@ import "../styles/Home.css";
 import default_album from "../assets/default_album.png";
 import { Redirect } from "react-router-dom";
 
-/*
-IMPORTANT :
-When you launch the npm start, you need to go to 
-the route http://localhost:3000/login first before landing here. 
-*/
-
 const Home = () => {
+
     const [token, setToken] = useState("");
 
     const [artists, setArtists] = useState([]);
 
     const [recentlyPlayed, setRecentlyPlayed] = useState([]);
 
-    const [isLogged, setIsLogged] = useState(false);
-
     // Get artists from Search component 
     const handleParents = (arg) => {
         setArtists(arg);
     };
 
-    // Helper function to get tokens from URL 
-    // function found here https://youtu.be/G_WFk4wg9fk?t=803
-    const getReturnsParams = (hash) => {
-        const string = hash.substring(1);
-        const paramsInUrl = string.split("&");
-        const paramsSplitUp = paramsInUrl.reduce((accumulater, currentValue) => {
-        const [key, value] = currentValue.split("=");
-        accumulater[key] = value;
-        return accumulater;
-        }, {});
-        return paramsSplitUp;
-    };
-
+    // Get token from storage to use it in fetch
+    let tokenFromStorage = window.localStorage.getItem("access_token");
     useEffect(() => {
-        if (window.location.hash) {
-            const { access_token, expires_in, token_type } = getReturnsParams(
-                window.location.hash
-            );
 
-            // Sending token in local storage
-            localStorage.clear();
-            localStorage.setItem("access_token", access_token);
-            localStorage.setItem("expires_in", expires_in);
-            localStorage.setItem("token_type", token_type);
-
-            access_token ? setIsLogged(true) : setIsLogged(false);
-        }
-
-        // Get token from storage to use it in fetch
-        let tokenFromStorage = window.localStorage.getItem("access_token");
 
         const url = `https://api.spotify.com/v1/me/player/recently-played`;
         const headers = {
@@ -84,7 +51,7 @@ const Home = () => {
         <div className="all-container">
         <NavBar />
         <div className="home-container">
-            <Search data={handleParents} token={localStorage.access_token} />
+            <Search data={handleParents} token={tokenFromStorage} />
             <div className="card-container">
             {artists.length === 0 ? (
                 <div className="home-without-songs">
