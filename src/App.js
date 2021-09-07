@@ -8,8 +8,6 @@ import Home from './pages/Home';
 import AlbumsPage from './pages/Albums';
 import TracksPage from './pages/Tracks';
 
-
-
 function App() {
 
   const [token, setToken] = useState(null);
