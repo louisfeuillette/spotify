@@ -9,8 +9,13 @@ const Login = () => {
     
     // link to get access token on URL
     const handleLogin = () => {
+        // If you're testing with localhost:3000
+        // // window.location =
+        // // `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&scope=user-read-recently-played&show_dialog=true`;
+        
+        // Heroku redirection 
         window.location =
-        `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&scope=user-read-recently-played&show_dialog=true`;
+        `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&redirect_uri=https%3A%2F%2Flouispotify.herokuapp.com%2F&scope=user-read-recently-played&show_dialog=true`;
     };
 
     return (
